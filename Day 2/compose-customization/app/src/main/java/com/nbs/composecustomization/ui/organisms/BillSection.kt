@@ -23,7 +23,6 @@ import com.nbs.composecustomization.R
 import com.nbs.composecustomization.ui.atoms.SurfaceIcon
 import com.nbs.composecustomization.ui.molecules.ResourceItem
 import com.nbs.composecustomization.ui.molecules.ResourceItemAttribute
-import com.nbs.composecustomization.ui.theme.colorOnPrimaryContainer
 import com.nbs.composecustomization.ui.theme.colorPrimary
 import com.nbs.composecustomization.ui.theme.colorSecondaryContainer
 
@@ -77,7 +76,7 @@ fun BillSection(
                             iconRes = item.iconRes,
                             size = 28.dp,
                             iconPadding = 8.dp,
-                            iconColor = colorOnPrimaryContainer,
+                            iconColor = Color.Unspecified,
                             backgroundColor = item.iconBackgroundColor,
                         )
                     },
