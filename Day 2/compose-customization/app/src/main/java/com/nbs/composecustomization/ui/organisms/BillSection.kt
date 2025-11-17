@@ -74,7 +74,7 @@ fun BillSection(
                     ),
                     leadingContent = {
                         SurfaceIcon(
-                            iconRes = R.drawable.ic_card,
+                            iconRes = item.iconRes,
                             size = 28.dp,
                             iconPadding = 8.dp,
                             iconColor = colorOnPrimaryContainer,

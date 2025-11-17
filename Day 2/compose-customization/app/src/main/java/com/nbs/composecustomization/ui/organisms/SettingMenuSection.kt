@@ -54,7 +54,7 @@ fun SettingMenuSection(attribute: SettingMenuSectionAttribute) {
                 ),
                 leadingContent = {
                     SurfaceIcon(
-                        iconRes = R.drawable.ic_card,
+                        iconRes = item.iconRes,
                         size = 28.dp,
                         iconPadding = 12.dp,
                         iconColor = colorOnSecondaryContainer,
