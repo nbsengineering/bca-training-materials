@@ -1,39 +1,26 @@
 package com.nbs.composecustomization.ui.screens
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.nbs.composecustomization.R
 import com.nbs.composecustomization.ui.organisms.HeaderPage
 import com.nbs.composecustomization.ui.organisms.MenuResourceItemAttribute
+import com.nbs.composecustomization.ui.organisms.PrimaryButton
 import com.nbs.composecustomization.ui.organisms.ProfileComponent
 import com.nbs.composecustomization.ui.organisms.ProfileComponentAttribute
 import com.nbs.composecustomization.ui.organisms.SettingMenuSection
 import com.nbs.composecustomization.ui.organisms.SettingMenuSectionAttribute
-import com.nbs.composecustomization.ui.theme.colorOnPrimary
-import com.nbs.composecustomization.ui.theme.colorOnTertiaryContainer
 
 
 private data class SettingScreenState(
@@ -72,7 +59,14 @@ private fun SettingScreen(
             )
         },
         bottomBar = {
-            SettingScreenBottomBar(event = event)
+            PrimaryButton(
+                modifier = Modifier.padding(16.dp),
+                text = "Logout",
+                leadingIconRes = R.drawable.ic_logout_outline,
+                onClick = {
+                    event(SettingScreenEvent.OnClickLogout)
+                }
+            )
         },
     )
 }
@@ -96,34 +90,6 @@ private fun SettingScreenContent(modifier: Modifier, state: SettingScreenState) 
 
         items(state.settingMenuList) { section ->
             SettingMenuSection(attribute = section)
-        }
-    }
-}
-
-@Composable
-private fun SettingScreenBottomBar(event: (SettingScreenEvent) -> Unit) {
-    Button(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        shape = CircleShape,
-        border = BorderStroke(width = 1.dp, color = colorOnTertiaryContainer),
-        colors = ButtonDefaults.buttonColors(containerColor = colorOnPrimary),
-        onClick = {
-            event(SettingScreenEvent.OnClickLogout)
-        },
-    ) {
-        Row(
-            modifier = Modifier.padding(vertical = 8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            Icon(
-                modifier = Modifier.size(20.dp),
-                painter = painterResource(R.drawable.ic_logout_outline),
-                contentDescription = null,
-                tint = Color.Red,
-            )
-            Text(text = "Logout", color = Color.Red, fontWeight = FontWeight.Bold, fontSize = 16.sp)
         }
     }
 }

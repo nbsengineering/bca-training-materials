@@ -21,7 +21,7 @@ data class MenuGridAttribute(
 )
 
 @Composable
-fun MenuGrid(attribute: MenuGridAttribute) {
+fun MenuGrid(attribute: MenuGridAttribute, onClickMenu: (() -> Unit)? = null) {
     val items = attribute.itemList
     val chunkedItems = items.chunked(4)
 
@@ -37,7 +37,7 @@ fun MenuGrid(attribute: MenuGridAttribute) {
                 horizontalArrangement = Arrangement.SpaceAround,
             ) {
                 rowItems.forEach { item ->
-                    MenuCard(attribute = item)
+                    MenuCard(attribute = item, onClick = onClickMenu)
                 }
 
                 repeat(4 - rowItems.size) {
