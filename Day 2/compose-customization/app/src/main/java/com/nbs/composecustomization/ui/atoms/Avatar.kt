@@ -15,9 +15,9 @@ import androidx.compose.ui.unit.dp
 import com.nbs.composecustomization.R
 
 @Composable
-fun Avatar(@DrawableRes imageRes: Int, size: Dp = 48.dp) {
+fun Avatar(@DrawableRes imageRes: Int, modifier: Modifier = Modifier, size: Dp = 48.dp) {
     Image(
-        modifier = Modifier
+        modifier = modifier
             .size(size)
             .clip(CircleShape),
         painter = painterResource(imageRes),
