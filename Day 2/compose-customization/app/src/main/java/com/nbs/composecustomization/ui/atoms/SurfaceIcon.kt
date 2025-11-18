@@ -22,6 +22,7 @@ import com.nbs.composecustomization.ui.theme.colorSecondaryContainer
 @Composable
 fun SurfaceIcon(
     @DrawableRes iconRes: Int,
+    modifier: Modifier = Modifier,
     size: Dp = 26.dp,
     iconColor: Color = Color.Black,
     backgroundColor: Color = colorSecondaryContainer,
@@ -29,7 +30,7 @@ fun SurfaceIcon(
     iconPadding: Dp = 16.dp,
 ) {
     Icon(
-        modifier = Modifier
+        modifier = modifier
             .clip(shape)
             .background(backgroundColor)
             .padding(iconPadding)

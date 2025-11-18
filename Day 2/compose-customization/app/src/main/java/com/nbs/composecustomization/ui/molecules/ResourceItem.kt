@@ -24,6 +24,7 @@ import com.nbs.composecustomization.ui.theme.colorOnPrimaryContainer
 import com.nbs.composecustomization.ui.theme.colorPrimaryContainer
 
 data class ResourceItemAttribute(
+    val modifier: Modifier = Modifier,
     val label: String? = null,
     val description: String? = null,
     val notes: String? = null,
@@ -46,13 +47,24 @@ fun ResourceItem(
         Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             attribute.label?.let {
                 Text(
+                    modifier = attribute.modifier.fillMaxWidth(),
                     text = it,
                     fontWeight = FontWeight.Medium,
                     fontSize = 16.sp
                 )
             }
-            attribute.description?.let { Text(text = it, color = Color.DarkGray, fontSize = 14.sp) }
-            attribute.notes?.let { Text(text = it, color = Color.Gray, fontSize = 12.sp) }
+            attribute.description?.let { Text(
+                modifier = attribute.modifier.fillMaxWidth(),
+                text = it,
+                color = Color.DarkGray,
+                fontSize = 14.sp
+            ) }
+            attribute.notes?.let { Text(
+                modifier = attribute.modifier.fillMaxWidth(),
+                text = it,
+                color = Color.Gray,
+                fontSize = 12.sp
+            ) }
         }
         trailingContent?.invoke()
     }
