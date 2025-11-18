@@ -37,7 +37,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
 import com.nbs.composecustomization.R
-import com.nbs.composecustomization.ui.atoms.Avatar
 import com.nbs.composecustomization.ui.atoms.SurfaceIcon
 import com.nbs.composecustomization.ui.molecules.ResourceItem
 import com.nbs.composecustomization.ui.molecules.ResourceItemAttribute
@@ -75,9 +74,9 @@ fun Modifier.wiggle(
 @Preview
 @Composable
 private fun WigglePreview() {
-    Avatar(
+    SurfaceIcon(
         modifier = Modifier.wiggle(),
-        imageRes = R.drawable.img_man_side_view,
+        iconRes = R.drawable.ic_transfer
     )
 }
 
@@ -153,6 +152,7 @@ private fun ShimmerPreview() {
                 )
                 Box(
                     modifier = Modifier
+                        .shimmer()
                         .size(8.dp)
                         .clip(CircleShape)
                         .background(Color.Red)
