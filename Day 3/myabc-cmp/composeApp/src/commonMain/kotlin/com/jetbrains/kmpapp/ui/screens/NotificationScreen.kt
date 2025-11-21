@@ -1,0 +1,128 @@
+package com.jetbrains.kmpapp.ui.screens
+
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import com.jetbrains.kmpapp.ui.organisms.HeaderPage
+import com.jetbrains.kmpapp.ui.organisms.NotificationResourceItemAttribute
+import com.jetbrains.kmpapp.ui.organisms.NotificationSection
+import com.jetbrains.kmpapp.ui.organisms.NotificationSectionAttribute
+import myabc_cmp.composeapp.generated.resources.*
+import org.jetbrains.compose.ui.tooling.preview.Preview
+
+data class NotificationScreenState(
+    val notificationList: List<NotificationSectionAttribute> = emptyList(),
+)
+
+sealed class NotificationScreenEvent {
+    data object OnClickBack : NotificationScreenEvent()
+}
+
+@Composable
+fun NotificationScreen(
+    state: NotificationScreenState = NotificationScreenState(),
+    event: (NotificationScreenEvent) -> Unit = {},
+) {
+    Scaffold(
+        modifier = Modifier.systemBarsPadding(),
+        containerColor = Color.White,
+        topBar = {
+            HeaderPage(
+                title = "Notifications",
+                leadingIconRes = Res.drawable.ic_arrow_left,
+                onClickLeadingIcon = {
+                    event(NotificationScreenEvent.OnClickBack)
+                },
+            )
+        },
+        content = {
+            NotificationScreenContent(
+                modifier = Modifier.padding(it),
+                state = state,
+                event = event,
+            )
+        },
+    )
+}
+
+
+@Composable
+private fun NotificationScreenContent(
+    modifier: Modifier,
+    state: NotificationScreenState,
+    event: (NotificationScreenEvent) -> Unit,
+) {
+    LazyColumn(
+        modifier = modifier,
+        contentPadding = PaddingValues(16.dp),
+    ) {
+        items(state.notificationList) { section ->
+            NotificationSection(attribute = section)
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun NotificationScreenPreview() {
+    NotificationScreen(
+        state = NotificationScreenState(
+            notificationList = listOf(
+                NotificationSectionAttribute(
+                    date = "TODAY",
+                    itemList = listOf(
+                        NotificationResourceItemAttribute(
+                            iconRes = Res.drawable.ic_card_outline,
+                            label = "Card Purchase",
+                            description = "$50.00 at Starbucks",
+                            timestamp = "10:45 AM",
+                        ),
+                        NotificationResourceItemAttribute(
+                            iconRes = Res.drawable.ic_card_outline,
+                            label = "New Device Login",
+                            description = "From a device in London, UK",
+                            timestamp = "9:30 AM",
+                        ),
+                    ),
+                ),
+                NotificationSectionAttribute(
+                    date = "YESTERDAY",
+                    itemList = listOf(
+                        NotificationResourceItemAttribute(
+                            iconRes = Res.drawable.ic_card_outline,
+                            label = "New Cashback Offer",
+                            description = "Earn 5% back on dining.",
+                            timestamp = "4:15 PM",
+                        ),
+                        NotificationResourceItemAttribute(
+                            iconRes = Res.drawable.ic_card_outline,
+                            label = "Your e-Statement is Ready",
+                            description = "Statement for October 2023",
+                            timestamp = "9:02 AM",
+                            isUnread = false,
+                        ),
+                    ),
+                ),
+                NotificationSectionAttribute(
+                    date = "OCTOBER 15",
+                    itemList = listOf(
+                        NotificationResourceItemAttribute(
+                            iconRes = Res.drawable.ic_card_outline,
+                            label = "Card Purchase",
+                            description = "$12.50 at Starbucks",
+                            timestamp = "11:55 AM",
+                            isUnread = false,
+                        ),
+                    ),
+                ),
+            ),
+        ),
+    )
+}
